@@ -16,6 +16,7 @@ var app = express();
 // });
 
 //Remote DB connection
+//If DB gets offline fix it from https://remotemysql.com/
 var connection = mysql.createConnection({
 
     host:"remotemysql.com",

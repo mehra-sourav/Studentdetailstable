@@ -93,7 +93,10 @@
         document.getElementById("addbutton").addEventListener("click",(event) =>{
             event.preventDefaultt();
             var xhr = new XMLHttpRequest();
+            //Deployment endpoint URL
             xhr.open("GET", "https://studentdetail.herokuapp.com/", true);
+            //Development endpoint URL
+            // xhr.open("GET", "https://localhost:3000/", true);
             xhr.send();
             // alert("in xhr");
             // console.log("in xhr")
@@ -110,7 +113,10 @@
         function Getlist()
         {
             var xhr = new XMLHttpRequest();
+            //Deployment endpoint URL
             xhr.open("GET", "https://studentdetail.herokuapp.com/getall", true);
+            //Development endpoint URL
+            // xhr.open("GET", "https://localhost:3000/getall", true);
             xhr.send();
             // alert("in xhr");
             // console.log("in getlist")
