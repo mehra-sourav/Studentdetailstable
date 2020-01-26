@@ -79,7 +79,7 @@
     <script>
         function Changepage(x)
         {
-            console.log(x,"clicked")
+            // console.log(x,"clicked")
             var list = ["add","list","search","delete"] ;
             document.getElementById(x).setAttribute("style","display:block");
 
@@ -96,11 +96,11 @@
             xhr.open("GET", "https://studentdetail.herokuapp.com/", true);
             xhr.send();
             // alert("in xhr");
-            console.log("in xhr")
+            // console.log("in xhr")
             xhr.onreadystatechange = function() {
                 if(this.readyState == 4) {
-                    console.log(this.response)
-                    console.log("Add is triggered")
+                    // console.log(this.response)
+                    // console.log("Add is triggered")
                     document.getElementById("addresult").innerHTML = "<h3>1 Entry added</h3>"+this.responseText;
                 }
             }
@@ -113,10 +113,10 @@
             xhr.open("GET", "https://studentdetail.herokuapp.com/getall", true);
             xhr.send();
             // alert("in xhr");
-            console.log("in getlist")
+            // console.log("in getlist")
             xhr.onreadystatechange = function() {
                 if(this.readyState == 4) {
-                    console.log(this.response)
+                    // console.log(this.response)
                     document.getElementById("list").innerHTML = this.responseText;
                 }
             }
