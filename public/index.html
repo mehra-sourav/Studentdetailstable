@@ -1,0 +1,182 @@
+<html>
+<head>
+    <title>Database</title>
+    <style>
+        a
+        {
+            margin:0px 20px;
+        }
+        #list
+        {
+            display: none;
+        }
+        #search
+        {
+            display: none;
+        }
+        #delete
+        {
+            display: none;
+        }
+        td
+        {
+            text-align: center;
+            border:1px solid black;
+            
+        }
+        tr
+        {
+            /* border:1px solid black; */
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <h1 style="text-align:center;">Querying DB</h1>
+    <div>
+        <a href="#" onclick="Changepage('add')">ADD</a>
+        <a href="#" onclick="Changepage('list');Getlist();">LIST</a>
+        <a href="#" onclick="Changepage('search')">SEARCH</a>
+        <a href="#" onclick="Changepage('delete')">DELETE</a>
+    </div>
+    <br/>
+
+    <div id="add">
+        <form method="post" action="/">
+            <input type="text" name="id" placeholder="ID" required>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="age" placeholder="Age" required>
+            <input type="text" name="year" placeholder="Year" required>
+            <input type="text" name="gender" placeholder="Gender(M/F)" required>
+            <input type="submit" value="ADD" id="addbutton">
+            <!-- <button value="ADD" type="submit" id="addbutton" onclick="return false;">ADD</button> -->
+            <!-- <button value="ADD" id="addbutton" onclick="return false;">ADD</button> -->
+            
+        </form>
+        <div id="addresult"></div>
+    </div>
+    <div id="list">
+        <table style="width:100%">
+        </table>
+
+    </div>
+    <div id="search">
+        <form method="post" action="/search">
+            <input type="text" name="id" placeholder="ID" required>
+            <input type="submit" value="Search" id="searchbutton">
+        </form>
+        <div id="searchlist">
+                <table style="width:100%">
+                </table>
+        </div>
+    </div>
+    <div id="delete">
+        <form method="delete" action="/delete">
+            <input type="text" name="id" placeholder="ID" required>
+            <input type="submit" value="Delete" id="deletebutton">
+        </form>
+        
+    </div>
+    <script>
+        function Changepage(x)
+        {
+            console.log(x,"clicked")
+            var list = ["add","list","search","delete"] ;
+            document.getElementById(x).setAttribute("style","display:block");
+
+            list.forEach(element => {
+                if(element!=x)
+                    document.getElementById(element).setAttribute("style","display:none");
+            });
+            
+        }
+
+        document.getElementById("addbutton").addEventListener("click",(event) =>{
+            event.preventDefaultt();
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:3000/", true);
+            xhr.send();
+            // alert("in xhr");
+            console.log("in xhr")
+            xhr.onreadystatechange = function() {
+                if(this.readyState == 4) {
+                    console.log(this.response)
+                    console.log("Add is triggered")
+                    document.getElementById("addresult").innerHTML = "<h3>1 Entry added</h3>"+this.responseText;
+                }
+            }
+            // return false;
+        });
+
+        function Getlist()
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:3000/getall", true);
+            xhr.send();
+            // alert("in xhr");
+            console.log("in getlist")
+            xhr.onreadystatechange = function() {
+                if(this.readyState == 4) {
+                    console.log(this.response)
+                    document.getElementById("list").innerHTML = this.responseText;
+                }
+            }
+        }
+
+        // document.getElementById("searchbutton").addEventListener("click",(event) =>{
+        //     // event.preventDefaultt();
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open("POST", "http://localhost:3000", true);
+        //     xhr.send();
+        //     // alert("in xhr");
+        //     console.log("in xhr")
+        //     xhr.onreadystatechange = function() {
+        //         if(this.readyState == 4) {
+        //             console.log(this.response)
+        //             document.getElementById("searchresult").innerHTML = "<h3>1 Entry added</h3>"+this.responseText;
+        //         }
+        //     }
+        //     // return false;
+        // });
+
+        // document.getElementById("deletebutton").addEventListener("click",(event) =>{
+        //     event.preventDefaultt();
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open("GET", "http://localhost:3000/", true);
+        //     xhr.send();
+        //     // alert("in xhr");
+        //     console.log("in delete xhr")
+        //     xhr.onreadystatechange = function() {
+        //         if(this.readyState == 4) {
+        //             console.log(this.response)
+        //             console.log("Delete is triggered")
+        //             // document.getElementById("addresult").innerHTML = "<h3>1 Entry added</h3>"+this.responseText;
+        //         }
+        //     }
+        //     // return false;
+        // });
+
+
+
+        // document.getElementById("addbutton").onclick = () =>
+        // {
+        //     console.log(document.getElementById("id").value)
+            
+        //     const response = fetch('/',{
+        //         method:'POST',
+        //         body:{
+        //             // JSON.stringify({
+        //             id:document.getElementById("id").value,
+        //             name:document.getElementById("name").value,
+        //             age:document.getElementById("age").value,
+        //             year:document.getElementById("year").value,
+        //             gender:document.getElementById("gender").value
+        //         // })
+        //         }
+        //     })
+        // }
+
+    </script>
+</body>
+
+
+</html>
