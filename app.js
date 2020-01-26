@@ -44,7 +44,7 @@ app.use(express.static("public"))
 
 app.get('/',function(req,res){
     // console.log("in GET")
-    res.sendFile(__dirname+'/index.html');
+    res.sendFile(path.resolve(__dirname+"/index.html"));
 })
 
 app.post('/',urlencodedParser, function(req,res){
@@ -238,4 +238,4 @@ function entrytostring(x)
 //         '</table>'
 // }
 
-app.listen('3000');
+app.listen(process.env.PORT || 3000);
